@@ -1,0 +1,19 @@
+.container {
+  height: calc(100vh - 56px);
+  max-width: 600px;
+  padding: 2rem;
+}
+form input {
+  margin: 15px 0;
+}
+form .btn {
+  cursor: pointer;
+}
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}

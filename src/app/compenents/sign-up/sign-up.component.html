@@ -1,0 +1,83 @@
+<div class="container">
+  <h2 class="text-center">Sign Up</h2>
+  <form #ref="ngForm" (ngSubmit)="onSubmit(ref)">
+    <input
+      #name="ngModel"
+      name="name"
+      ngModel
+      type="text"
+      class="form-control"
+      placeholder="Your Name"
+      required
+    />
+    <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+      Name is Required
+    </div>
+    <input
+      #email="ngModel"
+      name="email"
+      ngModel
+      type="email"
+      class="form-control"
+      placeholder="Enter email"
+      required
+      email
+    />
+    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+      Email is NotValid
+    </div>
+
+    <input
+      #pass="ngModel"
+      name="password"
+      ngModel
+      type="password"
+      class="form-control"
+      placeholder="Your Password"
+      required
+      minlength="6"
+    />
+    <div class="alert alert-danger" *ngIf="pass.invalid && pass.touched">
+      Password is Smaller Than 6
+    </div>
+    <input
+      #passConf="ngModel"
+      name="passwordConfirm"
+      ngModel
+      type="password"
+      class="form-control"
+      placeholder="Confirm Password"
+      required
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="passConf.touched && passConf.value !== pass.value"
+    >
+      Passwords Are Not Equal
+    </div>
+    <div
+      class="alert alert-success"
+      *ngIf="passConf.touched && passConf.value === pass.value"
+    >
+      Password is True
+    </div>
+    <input
+      #address="ngModel"
+      name="address"
+      ngModel
+      type="text"
+      class="form-control"
+      placeholder="Address"
+      required
+    />
+    <div class="alert alert-danger" *ngIf="address.invalid && address.touched">
+      address is Required
+    </div>
+    <button
+      class="btn btn-success"
+      [disabled]="ref.invalid || passConf.value !== pass.value"
+    >
+      Create Account
+    </button>
+  </form>
+</div>

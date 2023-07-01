@@ -1,0 +1,16 @@
+<div class="container body pt-2">
+  <div class="row mw-100 g-2 p-1 justify-content-center m-0">
+    <div class="col-md-3" *ngFor="let good of goods; let i = index">
+      <div class="card">
+        <img class="card-img-top" [src]="good.photoUrl" alt="Card image cap" />
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ good.name | titlecase }}</h5>
+          <p class="card-text">Its Price is : {{ good.price }}$</p>
+          <button class="btn btn-primary" (click)="addToCart(i)">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
