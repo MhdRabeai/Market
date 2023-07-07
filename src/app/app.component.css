@@ -2,3 +2,6 @@ app-navbar {
   width: 100%;
   background: #212529;
 }
+app-goods {
+  min-height: 100vh;
+}

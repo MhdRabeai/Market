@@ -28,8 +28,8 @@
       Password is Smaller Than 6
     </div>
 
-    <button class="btn btn-success" [disabled]="ref.invalid">
-      Create Account
-    </button>
+    <button class="btn btn-success" [disabled]="ref.invalid">Login</button>
   </form>
+  <br />
+  <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
 </div>

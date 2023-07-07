@@ -1,1 +1,97 @@
-<p>goods works!</p>
+<div class="container d-flex justify-content-center align-items-center mt-2">
+  <div class="w-100">
+    <h2 class="text-center mt-2">Add New Good</h2>
+    <form #f="ngForm" (ngSubmit)="AddNewGood(f)" *ngIf="!isFetching">
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        ngModel
+        placeholder="Name"
+        required
+      />
+      <input
+        type="number"
+        class="form-control"
+        name="price"
+        ngModel
+        placeholder="Price"
+        required
+      />
+      <input type="file" ngMogel name="image" required #image /><br />
+      <input
+        type="submit"
+        value="Add"
+        class="btn btn-primary"
+        [disabled]="f.invalid"
+      />
+    </form>
+  </div>
+</div>
+<div
+  class="container d-flex justify-content-center align-items-center mb-4"
+  *ngIf="!isFetching"
+>
+  <div class="w-100">
+    <h2 class="text-center mt-2">Edit Good</h2>
+    <table class="w-100">
+      <thead class="fw-bold">
+        <td>Name</td>
+        <td>Price</td>
+
+        <td>Options</td>
+      </thead>
+      <tbody>
+        <tr *ngFor="let good of goods; let i = index">
+          <td>{{ good.name | titlecase }}</td>
+          <td>
+            <input
+              class="form-control"
+              ngModel
+              type="number"
+              name="price"
+              [value]="good.price"
+              [(ngModel)]="good.price"
+            />
+          </td>
+
+          <td class="buttons">
+            <button class="btn btn-primary" (click)="save(i)">Save</button>
+            <!--  -->
+            <button class="btn btn-danger" (click)="delete(i)">Delete</button>
+            <!--  -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container-loader" *ngIf="isFetching && !errorMessage">
+  <div class="blobs">
+    <div class="blob-center"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur
+          in="SourceGraphic"
+          stdDeviation="10"
+          result="blur"
+        ></feGaussianBlur>
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+          result="goo"
+        ></feColorMatrix>
+        <feBlend in="SourceGraphic" in2="goo"></feBlend>
+      </filter>
+    </defs>
+  </svg>
+</div>

@@ -29,28 +29,28 @@
             >Home
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuth">
           <a class="nav-link" routerLink="cart" routerLinkActive="active"
             >Cart</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuth">
           <a class="nav-link" routerLink="admin" routerLinkActive="active"
             >DashBoard</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isAuth">
           <a class="nav-link" routerLink="login" routerLinkActive="active"
             >Login</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isAuth">
           <a class="nav-link" routerLink="signup" routerLinkActive="active"
             >Sign Up</a
           >
         </li>
-        <li class="nav-item">
-          <button class="btn btn-danger">Log Out</button>
+        <li class="nav-item li-last" *ngIf="isAuth">
+          <button class="btn btn-danger out" (click)="logout()">Log Out</button>
         </li>
       </ul>
     </div>

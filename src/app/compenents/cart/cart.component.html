@@ -1,1 +1,61 @@
-<p>cart works!</p>
+<h2 class="text-center mt-4">Your Orders</h2>
+<div class="container d-flex justify-content-center align-items-center">
+  <table *ngIf="!isFetching">
+    <thead class="fw-bold">
+      <td>Name</td>
+      <td>Price</td>
+      <td>Amount</td>
+      <td>Total</td>
+      <td>Options</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let good of cart; let i = index">
+        <td>{{ good.name | titlecase }}</td>
+        <td>{{ good.price | currency }}</td>
+        <td>
+          <input
+            type="number"
+            placeholder="Amount (kg)"
+            [(ngModel)]="good.amount"
+          />
+        </td>
+        <td>
+          {{ good.price | multi : good.amount | currency }}
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="save(i)">Save</button>
+          <button class="btn btn-danger" (click)="delete(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container-loader" *ngIf="isFetching && !errorMessage">
+  <div class="blobs">
+    <div class="blob-center"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur
+          in="SourceGraphic"
+          stdDeviation="10"
+          result="blur"
+        ></feGaussianBlur>
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+          result="goo"
+        ></feColorMatrix>
+        <feBlend in="SourceGraphic" in2="goo"></feBlend>
+      </filter>
+    </defs>
+  </svg>
+</div>

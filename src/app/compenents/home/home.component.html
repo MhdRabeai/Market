@@ -1,16 +1,61 @@
 <div class="container body pt-2">
-  <div class="row mw-100 g-2 p-1 justify-content-center m-0">
-    <div class="col-md-3" *ngFor="let good of goods; let i = index">
+  <div class="row mw-100 g-2 p-1 m-0">
+    <div class="col-md-3 col-sm-6" *ngFor="let good of goods; let i = index">
       <div class="card">
         <img class="card-img-top" [src]="good.photoUrl" alt="Card image cap" />
         <div class="card-body text-center">
           <h5 class="card-title">{{ good.name | titlecase }}</h5>
           <p class="card-text">Its Price is : {{ good.price }}$</p>
-          <button class="btn btn-primary" (click)="addToCart(i)">
+          <button
+            class="btn btn-primary"
+            (click)="addToCart(i)"
+            *ngIf="add !== i"
+          >
             Add To Cart
           </button>
+          <div *ngIf="add === i">
+            <input
+              type="number"
+              class="form-control mt-2"
+              placeholder="Amount (Kg)"
+              #amount
+            />
+            <button (click)="buy(amount.value)" class="btn btn-primary mt-2">
+              Buy
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="container-loader" *ngIf="isFetching && !errorMessage">
+    <div class="blobs">
+      <div class="blob-center"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="10"
+            result="blur"
+          ></feGaussianBlur>
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+            result="goo"
+          ></feColorMatrix>
+          <feBlend in="SourceGraphic" in2="goo"></feBlend>
+        </filter>
+      </defs>
+    </svg>
+  </div>
 </div>
+<!--  -->
